@@ -1,6 +1,6 @@
 
 .carousel-container{
-  width: 100vw !important;
+  width: 99.1vw !important;
   margin: 0 !important;
   margin-left: -7.5px !important;
 }
@@ -8,8 +8,14 @@
   right: -40vw !important;
 }
 .carousel-img{
-width: 100% !important;
+width: 100vw !important;
 height: 90vh !important;
+}
+.products-list{
+  margin-top: 50px;
+}
+.product-card{
+  margin-bottom: 30px;
 }
 
 @media (max-height : 900px) {
