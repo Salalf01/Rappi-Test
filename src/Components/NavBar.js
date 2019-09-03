@@ -15,7 +15,7 @@ export default class NavBar extends Component {
     render() {
       return (
             <>
-                    <MDBNavbar color="unique-color-dark" dark expand="md">
+                    <MDBNavbar fixed="top" color="unique-color-dark" dark expand="md">
                       <MDBNavbarBrand>
                         <strong className="white-text">El Baratón</strong>
                       </MDBNavbarBrand>

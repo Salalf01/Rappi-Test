@@ -17,10 +17,20 @@ height: 90vh !important;
 .product-card{
   margin-bottom: 30px;
 }
+.cart-title{
+  margin-top: 80px;
+  margin-bottom: 50px;
+  padding-left: 25vw !important;  
+}
+
 
 @media (max-height : 900px) {
   .carousel-control-next {
     right: -18vw !important;
+  }
+  .cart-title {
+    padding-left: 35vw !important;  
+
   }
 }
 @media (max-width : 1080px) {

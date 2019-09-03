@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "firebase": "^6.5.0",
     "mdbreact": "^4.19.2",
     "ramda": "^0.26.1",
     "react": "^16.9.0",
@@ -10,6 +11,7 @@
     "react-flux-state": "^1.1.4",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "react-spinners": "^0.6.1",
     "react-toastify": "^5.3.2"
   },
   "scripts": {
