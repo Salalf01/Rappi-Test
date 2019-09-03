@@ -17,7 +17,7 @@ export default class NavBar extends Component {
             <>
                     <MDBNavbar color="unique-color-dark" dark expand="md">
                       <MDBNavbarBrand>
-                        <strong className="white-text">Rappi Test</strong>
+                        <strong className="white-text">El Baratón</strong>
                       </MDBNavbarBrand>
                       <MDBNavbarToggler onClick={this.toggleCollapse} />
                       <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>

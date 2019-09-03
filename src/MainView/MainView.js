@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MainCarousel from '../Components/MainCarousel';
 
     
 
@@ -13,10 +14,9 @@ export default class MainView extends Component {
    
   render() {
     return (
-        <>
-                    
-                    <h1>Main View</h1>
-                    </>
+        <>           
+          <MainCarousel/>
+       </>
     );
   }
 }
