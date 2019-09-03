@@ -4,6 +4,8 @@ export const PRODUCT_EVENT = 'PRODUCT_EVENT';
 export const PRODUCT_ERROR_EVENT = 'PRODUCT_ERROR_EVENT';
 export const CATEGORIES_EVENT  = 'CATEGORIES_EVENT';
 export const CATEGORIES_ERROR_EVENT = 'CATEGORIES_ERROR_EVENT';
+export const ADD_CART_EVENT = 'ADD_CART_EVENT';
+export const ADD_CART_ERROR = 'ADD_CART_ERROR';
 
 class ProductStore extends Flux.DashStore {
   constructor(){
@@ -12,6 +14,8 @@ class ProductStore extends Flux.DashStore {
     this.addEvent(PRODUCT_ERROR_EVENT);
     this.addEvent(CATEGORIES_EVENT);
     this.addEvent(CATEGORIES_ERROR_EVENT);
+    this.addEvent(ADD_CART_EVENT);
+    this.addEvent(ADD_CART_ERROR);
   }
 }
 

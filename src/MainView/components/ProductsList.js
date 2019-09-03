@@ -5,18 +5,18 @@ import PropTypes from 'prop-types';
 
 export default class ProductsList extends Component {
   render() {
-    const {products} = this.props;
+    const {products, addingToCart} = this.props;
     const productList = products.map(product =>{
       return (
         <MDBCol key={product.id} size='4' className="product-card">
           <MDBCard style={{ width: "22rem" }}>
             <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" waves />
-            <MDBCardBody className='elegant-color white-text rounded-bottom'>
+            <MDBCardBody>
               <MDBCardTitle>{product.name}</MDBCardTitle>
-              <MDBCardText className='elegant-color white-text rounded-bottom'>
+              <MDBCardText >
                 {product.price}
               </MDBCardText>
-              <MDBBtn className='justify-content-end'>
+              <MDBBtn className='justify-content-end' onClick={() => addingToCart(product)}>
                 <MDBIcon icon="shopping-cart" />
               </MDBBtn>
             </MDBCardBody>
@@ -39,4 +39,5 @@ export default class ProductsList extends Component {
 
 ProductsList.propTypes = {
   products : PropTypes.array.isRequired,
+  addingToCart : PropTypes.func.isRequired,
 };

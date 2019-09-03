@@ -1,9 +1,10 @@
 import React from 'react';
 import MainCarousel from '../Components/MainCarousel';
-import { getProducts } from './main-view-actions';
+import { getProducts, addToCart } from './main-view-actions';
 import View from 'react-flux-state';
-import { productStore, PRODUCT_EVENT } from './main-view-store';
+import { productStore, PRODUCT_EVENT, ADD_CART_EVENT } from './main-view-store';
 import ProductsList from './components/ProductsList';
+import { toast } from 'react-toastify';
 
     
 
@@ -21,7 +22,14 @@ export default class MainView extends View {
         products : data.products,
       });
     });
+    this.subscribe(productStore, ADD_CART_EVENT, (product) =>{
+      toast.success("Product " + product + " Added to Cart");
+    });
     getProducts();
+  }
+
+  addingToCart = (product) =>{
+    addToCart(product);
   }
    
   render() {
@@ -29,7 +37,7 @@ export default class MainView extends View {
     return (
         <>           
           <MainCarousel/>
-          <ProductsList products = {products}/>
+          <ProductsList products ={products} addingToCart={this.addingToCart}/>
        </>
     );
   }
