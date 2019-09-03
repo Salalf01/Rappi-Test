@@ -1,7 +1,7 @@
 import Flux from 'flux-state';
 import products from '../Data/products.json';
 import * as R from 'ramda';
-import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, } from './main-view-store.js';
+import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, } from './main-view-store.js.js.js.js';
 import firebase from 'firebase';
 
 
