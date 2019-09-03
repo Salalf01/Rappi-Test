@@ -34,8 +34,16 @@ height: 90vh !important;
   }
 }
 @media (max-width : 1080px) {
+  .carousel-container{
+    width: 100vw !important;
+    margin: 0 !important;
+    margin-left: -7.5px !important;
+  }
   .carousel-img{
     width: 100% !important;
     height: auto !important;
+    }
+    .carousel-control-next {
+      right: -1vw !important;
     }
 }
