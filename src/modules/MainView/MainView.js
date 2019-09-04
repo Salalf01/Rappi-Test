@@ -1,11 +1,12 @@
 import React from 'react';
 import MainCarousel from '../../Components/MainCarousel';
-import { getProducts, addToCart } from './main-view-actions';
+import { getProducts, addToCart, getCategories, categoryFilter } from './main-view-actions';
 import View from 'react-flux-state';
-import { productStore, PRODUCT_EVENT, ADD_CART_EVENT, ADD_CART_ERROR, CATEGORIES_EVENT } from './main-view-store';
+import { productStore, PRODUCT_EVENT, ADD_CART_EVENT, ADD_CART_ERROR, CATEGORIES_EVENT, FILTER_CATEGORY_EVENT } from './main-view-store';
 import ProductsList from './components/ProductsList';
 import { toast } from 'react-toastify';
-import Dropdown from '../../Components/Dropdown';
+import CategoriesDropDown from '../../Components/Dropdown';
+import { Loader } from '../../Components/Loader';
 
     
 
@@ -15,18 +16,20 @@ export default class MainView extends View {
     this.state={
       products: [],
       categories : [],
+      loading : true,
     };
  
   }
   componentDidMount(){
     this.subscribe(productStore, PRODUCT_EVENT , (data) =>{
       this.setState({
-        products : data.products,
+        products : data,
       });
     });
     this.subscribe(productStore, CATEGORIES_EVENT, data =>{
       this.setState({
-        categories : data,
+        categories : data.categories,
+        loading: false,
       });
     });
     this.subscribe(productStore, ADD_CART_EVENT, (name) =>{
@@ -35,21 +38,35 @@ export default class MainView extends View {
     this.subscribe(productStore, ADD_CART_ERROR, (e)=>{
       toast.error(e);
     });
+    this.subscribe(productStore, FILTER_CATEGORY_EVENT, (data) =>{
+      this.setState({
+        products : data,
+      });
+    });
+
     getProducts();
+    getCategories();
   }
 
   addingToCart = (product) =>{
     addToCart(product);
   }
+  getCategory = (category) =>{
+    categoryFilter(category);
+  }
    
   render() {
-    const {products, categories} = this.state;
+    const {products, categories, loading} = this.state;
     return (
-        <>           
+      <>         
+      {loading ? (<Loader/>) : (
+        <>
           <MainCarousel/>
-          <Dropdown categories ={categories}  />
+          <CategoriesDropDown categories={categories} onClick={this.getCategory}  />
           <ProductsList products ={products} addingToCart={this.addingToCart}/>
-       </>
+          </>
+      )}  
+          </>
     );
   }
 }

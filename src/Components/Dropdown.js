@@ -1,48 +1,50 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Dropdown } from 'semantic-ui-react';
 
-export default class Dropdown extends Component {
-  render() {
-    const { categories, categoryText } = this.props;
-    const dropDownCategories = (categories, name, isFirst) => (
-      <Dropdown text={name} pointing className="category-dropdown link item">
-        <Dropdown.Menu>
-          {isFirst && <Dropdown.Item onClick={() => onclick} >All</Dropdown.Item>}
-          {isFirst = false}
-          {categories.map(category => {
-            if (category.sublevels)
-              return (
-                <Dropdown.Item key={category.id}>
-                  {dropDownCategories(category.sublevels, category.name)}
-                </Dropdown.Item>
-              );
-            return (
-              <Dropdown.Item
-                className="leave"
-                onClick={() => onclick}
-                key={category.id}
-              >
-                {category.name}
-              </Dropdown.Item>
-            );
-          })}
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-    return (
-      <div className="categories-list">
-        {dropDownCategories(Object.values(categories), categoryText, true)}
-      </div>
-    );
-  };
+
+export default class CategoriesDropDown extends Component {
+ 
+   dropDownCategories = (categories, name, isFirst, onClick) => {
+     return (
+       <Dropdown text={name} pointing className="category-dropdown link item">
+         <Dropdown.Menu>
+           {isFirst && <Dropdown.Item className="category-first" onClick={() => onClick(0)} >Todo</Dropdown.Item>}
+           {isFirst = false}
+           {categories.map(category => {
+             if (category.sublevels)
+               return (
+                 <Dropdown.Item key={category.id} onClick={() => this.props.onClick(category.id)}>
+                   {this.dropDownCategories(category.sublevels, category.name)}
+                 </Dropdown.Item>
+               );
+             return (
+               <Dropdown.Item
+                 className="category-first"
+                 onClick={() => this.props.onClick(category.id)}
+                 key={category.id}
+               >
+                 {category.name}
+               </Dropdown.Item>
+             );
+           })}
+         </Dropdown.Menu>
+       </Dropdown>
+     );
+   };
+
+   render() {
+     const { categories, onClick } = this.props;
+     console.log(categories);
+     return (
+       <div className="categories-list">
+         {this.dropDownCategories(Object.values(categories), "Categorias", true, onClick)}
+       </div>
+     );
+   }
 }
 
-Dropdown.propTypes = {
-  categories : PropTypes.object.isRequired,
-  categoryText: PropTypes.string,
+CategoriesDropDown.propTypes = {
+  categories : PropTypes.array.isRequired,
+  onClick : PropTypes.func.isRequired
 };
-Dropdown.defaultProps = {
-  categoryText: 'All',
-};
-
-  

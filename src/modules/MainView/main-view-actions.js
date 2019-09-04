@@ -2,23 +2,36 @@ import Flux from 'flux-state';
 import products from '../../Data/products.json';
 import categories from '../../Data/categories.json';
 import * as R from 'ramda';
-import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, CATEGORIES_EVENT, } from './main-view-store.js';
+import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, CATEGORIES_EVENT, FILTER_CATEGORY_EVENT, } from './main-view-store.js';
 import firebase from 'firebase';
 
 
 
 export const getProducts = () =>{
 
-  const DBproducts = R.clone(products);
+  const DBproducts = R.clone(products.products);
 
   Flux.dispatchEvent(PRODUCT_EVENT, DBproducts);
 
 };
-export const getCategories = () => {
+export const getCategories = async () => {
   
-  const DBCategories = R.clone(categories);
+  const DBCategories = await R.clone(categories);
 
   Flux.dispatchEvent(CATEGORIES_EVENT, DBCategories);
+};
+
+export const categoryFilter = async (id) =>{
+  const DBproducts = R.clone(products.products);
+
+  const filteredProducts = await DBproducts.filter(product => id === product.sublevel_id);
+
+  if(id === 0){
+    Flux.dispatchEvent(FILTER_CATEGORY_EVENT, DBproducts)
+  }else{
+    Flux.dispatchEvent(FILTER_CATEGORY_EVENT,filteredProducts);
+  }
+
 };
 
 export const addToCart = async (product) =>{

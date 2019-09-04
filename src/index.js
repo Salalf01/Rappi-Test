@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase';
 import { config } from './config/firebase';
+import 'semantic-ui-css/semantic.min.css';
+
 
 firebase.initializeApp(config);
 ReactDOM.render(<App />, document.getElementById('root'));

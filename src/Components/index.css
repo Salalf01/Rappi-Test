@@ -61,3 +61,13 @@
     height: 2rem;
     color: #495057;
   }
+ 
+  .category-dropdown{
+    margin-top: 50px;
+    margin-left: 5vw;
+    font-size: 15px;
+  }
+  .category-first{
+    text-align: center !important;
+    font-size: 20px !important;
+  }
