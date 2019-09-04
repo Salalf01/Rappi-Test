@@ -1,7 +1,8 @@
 import Flux from 'flux-state';
-import products from '../Data/products.json';
+import products from '../../Data/products.json';
+import categories from '../../Data/categories.json';
 import * as R from 'ramda';
-import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, } from './main-view-store.js.js.js.js';
+import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, CATEGORIES_EVENT, } from './main-view-store.js';
 import firebase from 'firebase';
 
 
@@ -12,6 +13,12 @@ export const getProducts = () =>{
 
   Flux.dispatchEvent(PRODUCT_EVENT, DBproducts);
 
+};
+export const getCategories = () => {
+  
+  const DBCategories = R.clone(categories);
+
+  Flux.dispatchEvent(CATEGORIES_EVENT, DBCategories);
 };
 
 export const addToCart = async (product) =>{

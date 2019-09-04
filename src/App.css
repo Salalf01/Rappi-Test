@@ -23,6 +23,28 @@ height: 90vh !important;
   padding-left: 25vw !important;  
 }
 
+.cart-table{
+width: auto !important;
+max-height: 400px !important;
+overflow-y: scroll;
+}
+
+.cart-resume{
+  width: 500px;
+  height: 400px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.resume-content{
+  padding-top: 100px; 
+}
+.cart-btn{
+  padding-top: 130px;
+  text-align: end;
+}
+.loader-container {
+  margin-top: 45vh;
+}
 
 @media (max-height : 900px) {
   .carousel-control-next {
