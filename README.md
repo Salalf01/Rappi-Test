@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Used Tools
--[x] Firebase/Firestore
+- [x] Firebase/Firestore
 -[x] React Router
 -[x] [React Flux State](https://www.npmjs.com/package/react-flux-state)
 -[x] MDBReact
