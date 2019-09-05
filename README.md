@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Used Tools
+- [x] Firebase/Firestore
+- [x] React Router
+- [x] [React Flux State](https://www.npmjs.com/package/react-flux-state)
+- [x] [MDBReact](https://mdbootstrap.com/docs/react/)
+- [x] [React Spinners](https://www.npmjs.com/package/react-spinners)
+- [x] [Semantic UI](https://react.semantic-ui.com)
+- [x] [React Toastify](https://www.npmjs.com/package/react-toastify)
+- [x] [Ramda](https://ramdajs.com/)
+
+
 ## Available Scripts
 
 In the project directory, you can run:
