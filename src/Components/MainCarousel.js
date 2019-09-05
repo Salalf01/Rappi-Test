@@ -55,7 +55,7 @@ const MainCarousel = () => {
             </MDBView>
             <MDBCarouselCaption>
               <h3 className="h3-responsive">Desayunos</h3>
-              <p>Las Mejores cosas para desayunar</p>
+              <p>Lo Mejor para tus desayunos</p>
             </MDBCarouselCaption>
           </MDBCarouselItem>
           <MDBCarouselItem itemId="4">
