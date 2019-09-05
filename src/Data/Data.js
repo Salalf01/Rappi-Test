@@ -16,3 +16,18 @@ export const PriceRange = [
     major : 20000,
   },
 ];
+
+export const orderOptions = [
+  {
+    value : 1,
+    name  : 'precio'
+  },
+  {
+    value : 2,
+    name : 'disponibilidad',
+  },
+  {
+    value : 3,
+    name : 'cantidad',
+  }
+];

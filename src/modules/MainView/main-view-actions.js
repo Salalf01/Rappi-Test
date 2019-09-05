@@ -2,19 +2,19 @@ import Flux from 'flux-state';
 import products from '../../Data/products.json';
 import categories from '../../Data/categories.json';
 import * as R from 'ramda';
-import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, CATEGORIES_EVENT,  PRICE_FETCH_EVENT, } from './main-view-store.js';
+import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, CATEGORIES_EVENT,  PRICE_FETCH_EVENT, ORDER_EVENT, } from './main-view-store.js';
 import firebase from 'firebase';
-import { PriceRange }  from '../../Data/PriceRange';
+import { PriceRange, orderOptions }  from '../../Data/Data';
 
 
 /**
  * Gets all Products in Stock
  */
-export const getProducts = async ( category, price) =>{
-  console.log(category);
-  console.log(price);
+export const getProducts = async ( category, price, order) =>{
   const DBproducts = R.clone(products.products);
   let filteredProducts = DBproducts;
+
+  // Filters the stock if the user selects one filter
   if(category !== null){
     if(category !== 0){  
       filteredProducts = await filteredProducts.filter(product => category === product.sublevel_id);
@@ -27,6 +27,18 @@ export const getProducts = async ( category, price) =>{
       let pricesRange = price.match(regex);
       filteredProducts = await filteredProducts.filter(product => 
         Number(product.price.replace(/\D/g,'')) >= ++pricesRange[0] && Number(product.price.replace(/\D/g,'')) <= ++pricesRange[1]);
+    }
+  }
+
+  // Orders the stock for Price, Available and quantity
+  if(order !== null){
+    if(order === '1'){
+      filteredProducts = filteredProducts.sort((a, b) => {return Number(a.price.replace(/\D/g,'')) - Number(b.price.replace(/\D/g,''));
+      });
+    }else if(order === '2'){
+      filteredProducts = filteredProducts.sort((a, b) => {return b.available - a.available;});
+    }else if(order === '3'){
+      filteredProducts = filteredProducts.sort((a, b) => {return b.quantity - a.quantity;});
     }
   }
 
@@ -47,13 +59,22 @@ export const getCategories = async () => {
 /**
  * Gets All Prices to filter
  */
-export const getPricesFilter = async () =>{
+export const getPricesFilter =  () =>{
 
   const DBPrices =  R.clone(PriceRange);
 
   Flux.dispatchEvent(PRICE_FETCH_EVENT, DBPrices);
 };
 
+/**
+ * Gets all the options to list order
+ */
+export const getOderOptions =  () =>{
+
+  const DBOders =  R.clone(orderOptions);
+
+  Flux.dispatchEvent(ORDER_EVENT, DBOders);
+};
 /**
  * Adds Product to the Cart
  */

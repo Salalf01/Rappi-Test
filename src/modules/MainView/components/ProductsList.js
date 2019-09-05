@@ -14,7 +14,13 @@ export default class ProductsList extends Component {
             <MDBCardBody>
               <MDBCardTitle>{product.name}</MDBCardTitle>
               <MDBCardText >
-                {product.price}
+                {`Price: ${product.price}`}
+              </MDBCardText>
+              <MDBCardText>
+                {` Quantity:  ${product.quantity}`}
+              </MDBCardText>
+              <MDBCardText>
+                {product.available ? "Available" : "Not Available"}
               </MDBCardText>
               <MDBBtn className='justify-content-end' onClick={() => addingToCart(product)}>
                 <MDBIcon icon="shopping-cart" />
