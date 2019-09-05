@@ -6,7 +6,7 @@ export default class SelectOrder extends Component {
 
     return( 
       <div>
-        <select className=" input-select browser-default custom-select" onChange={onChange}>
+        <select className=" input-select-order browser-default custom-select" onChange={onChange}>
           <option value={0}>{ title }</option>
           {options.map(option =>{
             console.log("hola", option);

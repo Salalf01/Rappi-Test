@@ -50,6 +50,11 @@ overflow-y: scroll;
   margin-top: 47px;
   margin-right: 60px !important;
 }
+.input-select-order {
+  width: 160px !important;
+  margin-top: 47px;
+  margin-right: 60px !important;
+}
 
 @media (max-height : 900px) {
   .carousel-control-next {
@@ -72,5 +77,15 @@ overflow-y: scroll;
     }
     .carousel-control-next {
       right: -1vw !important;
+    }
+    .input-select{
+      width: 160px !important;
+      margin-top: 47px;
+      margin-right: 10px !important;
+    }
+    .input-select-order {
+      width: 160px !important;
+      margin-top: 47px;
+      margin-left: 100px;
     }
 }
