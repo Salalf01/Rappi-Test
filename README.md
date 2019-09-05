@@ -6,9 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 -[x] [React Flux State](https://www.npmjs.com/package/react-flux-state)
 -[x] MDBReact
 -[x] [React Spinners](https://www.npmjs.com/package/react-spinners)
--[x] [Semantic UI] (https://react.semantic-ui.com)
--[x] [React Toastify] (https://www.npmjs.com/package/react-toastify)
--[x] [Ramda] (https://ramdajs.com/)
+-[x] [Semantic UI](https://react.semantic-ui.com)
+-[x] [React Toastify](https://www.npmjs.com/package/react-toastify)
+-[x] [Ramda](https://ramdajs.com/)
 
 
 ## Available Scripts
