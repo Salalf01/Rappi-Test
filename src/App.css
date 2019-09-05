@@ -45,6 +45,11 @@ overflow-y: scroll;
 .loader-container {
   margin-top: 45vh;
 }
+.input-select{
+  width: 160px !important;
+  margin-top: 47px;
+  margin-right: 60px !important;
+}
 
 @media (max-height : 900px) {
   .carousel-control-next {

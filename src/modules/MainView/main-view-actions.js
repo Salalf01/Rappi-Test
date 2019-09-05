@@ -2,18 +2,41 @@ import Flux from 'flux-state';
 import products from '../../Data/products.json';
 import categories from '../../Data/categories.json';
 import * as R from 'ramda';
-import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, CATEGORIES_EVENT, FILTER_CATEGORY_EVENT, } from './main-view-store.js';
+import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, CATEGORIES_EVENT,  PRICE_FETCH_EVENT, } from './main-view-store.js';
 import firebase from 'firebase';
+import { PriceRange }  from '../../Data/PriceRange';
 
 
-
-export const getProducts = () =>{
-
+/**
+ * Gets all Products in Stock
+ */
+export const getProducts = async ( category, price) =>{
+  console.log(category);
+  console.log(price);
   const DBproducts = R.clone(products.products);
+  let filteredProducts = DBproducts;
+  if(category !== null){
+    if(category !== 0){  
+      filteredProducts = await filteredProducts.filter(product => category === product.sublevel_id);
+    }
 
-  Flux.dispatchEvent(PRODUCT_EVENT, DBproducts);
+  }
+  if(price !== null){
+    let regex = /(\d+)/g;
+    if(price !== '0'){
+      let pricesRange = price.match(regex);
+      filteredProducts = await filteredProducts.filter(product => 
+        Number(product.price.replace(/\D/g,'')) >= ++pricesRange[0] && Number(product.price.replace(/\D/g,'')) <= ++pricesRange[1]);
+    }
+  }
+
+  Flux.dispatchEvent(PRODUCT_EVENT, filteredProducts);
 
 };
+
+/**
+ * Gets All the available categories
+ */
 export const getCategories = async () => {
   
   const DBCategories = await R.clone(categories);
@@ -21,19 +44,19 @@ export const getCategories = async () => {
   Flux.dispatchEvent(CATEGORIES_EVENT, DBCategories);
 };
 
-export const categoryFilter = async (id) =>{
-  const DBproducts = R.clone(products.products);
+/**
+ * Gets All Prices to filter
+ */
+export const getPricesFilter = async () =>{
 
-  const filteredProducts = await DBproducts.filter(product => id === product.sublevel_id);
+  const DBPrices =  R.clone(PriceRange);
 
-  if(id === 0){
-    Flux.dispatchEvent(FILTER_CATEGORY_EVENT, DBproducts)
-  }else{
-    Flux.dispatchEvent(FILTER_CATEGORY_EVENT,filteredProducts);
-  }
-
+  Flux.dispatchEvent(PRICE_FETCH_EVENT, DBPrices);
 };
 
+/**
+ * Adds Product to the Cart
+ */
 export const addToCart = async (product) =>{
   const DB = firebase.firestore();
   const cartCollection = DB.collection('cart');

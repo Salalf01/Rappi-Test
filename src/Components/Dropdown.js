@@ -35,7 +35,6 @@ export default class CategoriesDropDown extends Component {
 
    render() {
      const { categories, onClick } = this.props;
-     console.log(categories);
      return (
        <div className="categories-list">
          {this.dropDownCategories(Object.values(categories), "Categorias", true, onClick)}
