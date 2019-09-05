@@ -56,6 +56,16 @@ overflow-y: scroll;
   margin-right: 60px !important;
 }
 
+.search-input{
+  margin-top: 21px;
+}
+.empty-inventory{
+  text-align: center;
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+  color : rgb(126, 126, 126)
+}
+
 @media (max-height : 900px) {
   .carousel-control-next {
     right: -18vw !important;
@@ -86,6 +96,11 @@ overflow-y: scroll;
     .input-select-order {
       width: 160px !important;
       margin-top: 47px;
-      margin-left: 100px;
+      margin-left: 10px;
+    }
+    .search-input{
+      margin-top: 23px;
+      width : 150px;
+      margin-left: -30px;
     }
 }

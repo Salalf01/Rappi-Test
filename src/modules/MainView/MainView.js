@@ -1,8 +1,8 @@
 import React from 'react';
 import MainCarousel from '../../Components/MainCarousel';
-import { getProducts, addToCart, getCategories,  getPricesFilter, getOderOptions, } from './main-view-actions';
+import { getProducts, addToCart, getCategories,  getPricesFilter, getOderOptions, searchProduct, } from './main-view-actions';
 import View from 'react-flux-state';
-import { productStore, PRODUCT_EVENT, ADD_CART_EVENT, ADD_CART_ERROR, CATEGORIES_EVENT, PRICE_FETCH_EVENT, ORDER_EVENT, } from './main-view-store';
+import { productStore, PRODUCT_EVENT, ADD_CART_EVENT, ADD_CART_ERROR, CATEGORIES_EVENT, PRICE_FETCH_EVENT, ORDER_EVENT, SEARCH_EVENT, } from './main-view-store';
 import ProductsList from './components/ProductsList';
 import { toast } from 'react-toastify';
 import CategoriesDropDown from '../../Components/Dropdown';
@@ -10,6 +10,7 @@ import { Loader } from '../../Components/Loader';
 import InputSelect from '../../Components/InputSelect';
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import SelectOrder from '../../Components/SelectOrder';
+import InputSearch from '../../Components/InputSearch';
 
     
 
@@ -25,6 +26,7 @@ export default class MainView extends View {
       category: null,
       prices : null,
       order : null,
+      search : null,
     };
   }
   componentDidMount(){
@@ -58,10 +60,15 @@ export default class MainView extends View {
     this.subscribe(productStore, ADD_CART_ERROR, (e)=>{
       toast.error(e);
     });
+    this.subscribe(productStore, SEARCH_EVENT, data =>{
+      this.setState({
+        products : data,
+      });
+    });
    
+    getProducts(this.state.category, this.state.prices , this.state.order);
     getPricesFilter();
     getOderOptions();
-    getProducts(this.state.category, this.state.prices , this.state.order);
     getCategories();
   }
 
@@ -90,12 +97,17 @@ export default class MainView extends View {
       order : e.target.value
     });
     getProducts(category, prices, e.target.value);
-
   }
+    onSearch = (e) => {
+      const { products, category, prices, order } = this.state;
+      console.log(e.target.value);
+      searchProduct(e.target.value , products, category, prices, order);
+
+    };
    
-  render() {
-    const {products, categories, pricesRange, orderOptions, loading} = this.state;
-    return (
+    render() {
+      const {products, categories, pricesRange, orderOptions, loading} = this.state;
+      return (
       <>         
       {loading ? (<Loader/>) : (
         <>
@@ -111,14 +123,27 @@ export default class MainView extends View {
               <MDBCol>
                 <SelectOrder title={"Ordenar por:"} options={orderOptions} onChange={this.getOrder}/>
               </MDBCol>
+              <MDBCol className="search-input">
+                <InputSearch onChange={this.onSearch} />
+              </MDBCol>
             </MDBRow>
           </MDBContainer>
-          <ProductsList products ={products} addingToCart={this.addingToCart}/>
+          {products.length === 0 ?
+            <MDBContainer className="empty-inventory">
+              <MDBRow>
+                <MDBCol>
+                  <h1>Empty Inventory</h1> :
+                </MDBCol>
+              </MDBRow>
+            </MDBContainer> 
+            :
+            <ProductsList products ={products} addingToCart={this.addingToCart}/>
+          }
           </>
       )}  
           </>
-    );
-  }
+      );
+    }
 }
 
 

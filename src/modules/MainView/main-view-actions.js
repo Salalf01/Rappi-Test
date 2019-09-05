@@ -2,7 +2,7 @@ import Flux from 'flux-state';
 import products from '../../Data/products.json';
 import categories from '../../Data/categories.json';
 import * as R from 'ramda';
-import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, CATEGORIES_EVENT,  PRICE_FETCH_EVENT, ORDER_EVENT, } from './main-view-store.js';
+import { PRODUCT_EVENT, ADD_CART_ERROR, ADD_CART_EVENT, CATEGORIES_EVENT,  PRICE_FETCH_EVENT, ORDER_EVENT, SEARCH_EVENT, } from './main-view-store.js';
 import firebase from 'firebase';
 import { PriceRange, orderOptions }  from '../../Data/Data';
 
@@ -22,7 +22,7 @@ export const getProducts = async ( category, price, order) =>{
 
   }
   if(price !== null){
-    let regex = /(\d+)/g;
+    const regex = /(\d+)/g;
     if(price !== '0'){
       let pricesRange = price.match(regex);
       filteredProducts = await filteredProducts.filter(product => 
@@ -44,6 +44,17 @@ export const getProducts = async ( category, price, order) =>{
 
   Flux.dispatchEvent(PRODUCT_EVENT, filteredProducts);
 
+};
+
+export const searchProduct = (name, products, category, prices, order) =>{
+  
+  if(name !== ''){
+    const regex  = RegExp(`${name}`);
+    let searchedProduct = products.filter(product => regex.test(product.name)); 
+    Flux.dispatchEvent(SEARCH_EVENT, searchedProduct);
+  }else{
+    getProducts(category, prices, order);
+  }
 };
 
 /**

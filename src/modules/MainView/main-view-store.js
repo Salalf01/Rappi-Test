@@ -8,6 +8,7 @@ export const ADD_CART_EVENT = 'ADD_CART_EVENT';
 export const ADD_CART_ERROR = 'ADD_CART_ERROR';
 export const PRICE_FETCH_EVENT = "PRICE_FETCH_EVENT";
 export const ORDER_EVENT = "ORDER_EVENT";
+export const SEARCH_EVENT = "SEARCH_EVENT";
 
 class ProductStore extends Flux.DashStore {
   constructor(){
@@ -20,6 +21,7 @@ class ProductStore extends Flux.DashStore {
     this.addEvent(ADD_CART_ERROR);
     this.addEvent(PRICE_FETCH_EVENT);
     this.addEvent(ORDER_EVENT);
+    this.addEvent(SEARCH_EVENT);
   }
 }
 
